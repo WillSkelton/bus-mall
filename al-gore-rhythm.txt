@@ -1,0 +1,30 @@
+-What do I want to make?
+
+	=The website from Wednesday night's lecture
+
+-How?
+
+	= HTML:
+
+		<body>
+			<header>
+				// header info (ie company name)
+
+
+			<main>
+				<div>
+					// pic 1
+
+				<div>
+					// pic 2
+
+				<div>
+					// pic 3
+
+
+	= Java-Script:
+
+		-global array of all the pictures as objects
+			= for now, call it picObjects
+		-function that creates and fills an array with 3 random && unique picObjects objects
+		-add those to the DOM as buttons images
