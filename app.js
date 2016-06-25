@@ -21,11 +21,53 @@ function selectPictures() {
 		randPic = specificRandom(0, 19, excluding);
 		excluding[i] =  randPic;
 		webSpot[i] = allPictures[randPic].path;
+		picUsed[i] = allPictures[randPic].name;
 	}
 
-	console.log(webSpot);
+}
 
+function constructPictures() {
+	// Constructs all the things
+	for (var i = 0; i < picArray.length; i++) {
+		var pic = new Picture(picArray[i]);
 
+	}
+}
+
+function displayPictures(){
+	// Randomly selects the pictures
+	selectPictures();
+		// Adds new Pictures to DOM
+		for (var i = 0; i < webSpot.length; i++) {
+			var picture = document.getElementById('pic' + (i + 1));
+			picture.src = "assets/" + picUsed[i] + ".jpg";
+		}
+}
+
+function eventListening() {
+	var randomizer1 = document.getElementById(pic1);
+	pic1.addEventListener("click", randomizeButton);
+
+	var randomizer2 = document.getElementById(pic2);
+	pic2.addEventListener("click", randomizeButton);
+
+	var randomizer3 = document.getElementById(pic3);
+	pic3.addEventListener("click", randomizeButton);
+
+}
+
+function randomizeButton(){
+	event.preventDefault();
+	selectPictures();
+	displayPictures();
+}
+
+function doAllTheThings() {
+	constructPictures();
+
+	displayPictures();
+
+	eventListening();
 }
 
 /* ============= Constructor: ============= */
@@ -42,36 +84,13 @@ function Picture(name) {
 /* ============= Global Variables: ============= */
 var allPictures = [];
 var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
+var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
 /* ============= Main(): ============= */
 
+doAllTheThings();
 
-// Constructs all the things
-for (var i = 0; i < picArray.length; i++) {
-	var pic = new Picture(picArray[i]);
-}
-
-// Randomly selects the pictures
-selectPictures();
-
-for (var i = 0; i < webSpot.length; i++) {
-	var parent = document.getElementById('pic' + (i + 1));
-	var child = document.createElement('img');
-	child.src = webSpot[i];
-	parent.appendChild(child);
-
-}
-
-
-
-/* ============= For Later: ============= */
-// var Bag = new Picture("bag", "jpg");
-// console.log(Bag);
-//
-// var parent = document.getElementById('pic1');
-// var child = document.createElement('img');
-// child.src = Bag.path;
-// parent.appendChild(child);
 
 
 
