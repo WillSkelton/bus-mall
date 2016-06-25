@@ -20,7 +20,7 @@ console.log(Bag);
 var parent = document.getElementById('pic1');
 var child = document.createElement('img');
 child.src = Bag.path;
-
+parent.appendChild(child);
 
 
 
