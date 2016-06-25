@@ -45,6 +45,30 @@ function displayPictures(){
 		}
 }
 
+function randomizeButton(event){
+	// console.log(numPicks);
+
+	if(numPicks === 15){
+		removeListener();
+	}
+	else{
+		var click = event.target.name;
+		// console.log(click);
+		numPicks++;
+		for (var i = 0; i < allPictures.length; i++) {
+			if (allPictures[i].name === click){
+				allPictures[i].timesChosen++;
+				// console.log(allPictures[i].timesChosen);
+				break;
+
+			}
+		}
+	}
+
+	selectPictures();
+	displayPictures();
+}
+
 function eventListening() {
 	var randomizer1 = document.getElementById(pic1);
 	pic1.addEventListener("click", randomizeButton);
@@ -57,30 +81,25 @@ function eventListening() {
 
 }
 
-function randomizeButton(event){
+function removeListener(){
+	var randomizer1 = document.getElementById(pic1);
+	pic1.removeEventListener("click", randomizeButton);
 
-	var click = event.target.name;
-	console.log(click);
-	for (var i = 0; i < allPictures.length; i++) {
-		if (allPictures[i].name === click){
-			allPictures[i].timesChosen++;
-			console.log(allPictures[i].timesChosen);
-			break;
+	var randomizer2 = document.getElementById(pic2);
+	pic2.removeEventListener("click", randomizeButton);
 
-		}
-	}
-
-
-	selectPictures();
-	displayPictures();
+	var randomizer3 = document.getElementById(pic3);
+	pic3.removeEventListener("click", randomizeButton);
 }
 
 function doAllTheThings() {
+
 	constructPictures();
 
 	displayPictures();
 
 	eventListening();
+
 }
 
 /* ============= Constructor: ============= */
@@ -99,6 +118,7 @@ var allPictures = [];
 var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var numPicks = 0;
 
 /* ============= Main(): ============= */
 
@@ -107,9 +127,7 @@ var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 
 
 doAllTheThings();
 
-for (var i = 0; i < picArray.length; i++) {
-	console.log(picArray[i].times);
-}
+
 
 
 
