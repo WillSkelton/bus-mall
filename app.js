@@ -50,6 +50,7 @@ function randomizeButton(event){
 
 	if(numPicks === 15){
 		removeListener();
+		makeTable();
 	}
 	else{
 		var click = event.target.name;
@@ -92,6 +93,23 @@ function removeListener(){
 	pic3.removeEventListener("click", randomizeButton);
 }
 
+function makeTable(){
+	for (var i = 0; i < picArray.length; i++) {
+		var tHeadParent = document.getElementById('thead-tr');
+		var tHeadChild = document.createElement('td');
+		tHeadChild.textContent = picArray[i];
+		tHeadParent.appendChild(tHeadChild);
+	}
+
+	for (var i = 0; i < picArray.length; i++) {
+		var tBodyParent = document.getElementById('tbody-tr');
+		var tBodyChild = document.createElement('td');
+		tBodyChild.textContent = allPictures[i].timesChosen;
+		tBodyParent.appendChild(tBodyChild);
+
+	}
+}
+
 function doAllTheThings() {
 
 	constructPictures();
@@ -99,6 +117,7 @@ function doAllTheThings() {
 	displayPictures();
 
 	eventListening();
+
 
 }
 
