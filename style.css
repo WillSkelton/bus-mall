@@ -30,6 +30,11 @@ p{
 
 }
 
+#picture-parent{
+	display: flex;
+	flex-direction: row;
+}
+
 #pic1{
 
 }
