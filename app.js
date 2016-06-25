@@ -21,7 +21,7 @@ function selectPictures() {
 		randPic = specificRandom(0, 19, excluding);
 		excluding[i] =  randPic;
 		webSpot[i] = allPictures[randPic].path;
-		picUsed[i] = allPictures[randPic].name;
+		picUsed[i] = allPictures[randPic];
 	}
 
 }
@@ -40,7 +40,8 @@ function displayPictures(){
 		// Adds new Pictures to DOM
 		for (var i = 0; i < webSpot.length; i++) {
 			var picture = document.getElementById('pic' + (i + 1));
-			picture.src = "assets/" + picUsed[i] + ".jpg";
+			picture.src = "assets/" + picUsed[i].name + ".jpg";
+			picture.name = picUsed[i].name;
 		}
 }
 
@@ -56,8 +57,20 @@ function eventListening() {
 
 }
 
-function randomizeButton(){
-	event.preventDefault();
+function randomizeButton(event){
+
+	var click = event.target.name;
+	console.log(click);
+	for (var i = 0; i < allPictures.length; i++) {
+		if (allPictures[i].name === click){
+			allPictures[i].timesChosen++;
+			console.log(allPictures[i].timesChosen);
+			break;
+
+		}
+	}
+
+
 	selectPictures();
 	displayPictures();
 }
@@ -89,8 +102,14 @@ var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 
 
 /* ============= Main(): ============= */
 
+
+
+
 doAllTheThings();
 
+for (var i = 0; i < picArray.length; i++) {
+	console.log(picArray[i].times);
+}
 
 
 
