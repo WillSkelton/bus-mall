@@ -45,12 +45,13 @@ function displayPictures(){
 		}
 }
 
-function randomizeButton(event){
+function showStats(event){
 	// console.log(numPicks);
 
-	if(numPicks === 15){
+	if(numPicks === 1){
 		removeListener();
-		makeTable();
+		// makeTable();
+		graphTime();
 	}
 	else{
 		var click = event.target.name;
@@ -72,25 +73,25 @@ function randomizeButton(event){
 
 function eventListening() {
 	var randomizer1 = document.getElementById(pic1);
-	pic1.addEventListener("click", randomizeButton);
+	pic1.addEventListener("click", showStats);
 
 	var randomizer2 = document.getElementById(pic2);
-	pic2.addEventListener("click", randomizeButton);
+	pic2.addEventListener("click", showStats);
 
 	var randomizer3 = document.getElementById(pic3);
-	pic3.addEventListener("click", randomizeButton);
+	pic3.addEventListener("click", showStats);
 
 }
 
 function removeListener(){
 	var randomizer1 = document.getElementById(pic1);
-	pic1.removeEventListener("click", randomizeButton);
+	pic1.removeEventListener("click", showStats);
 
 	var randomizer2 = document.getElementById(pic2);
-	pic2.removeEventListener("click", randomizeButton);
+	pic2.removeEventListener("click", showStats);
 
 	var randomizer3 = document.getElementById(pic3);
-	pic3.removeEventListener("click", randomizeButton);
+	pic3.removeEventListener("click", showStats);
 }
 
 function makeTable(){
@@ -110,6 +111,22 @@ function makeTable(){
 	}
 }
 
+function getStatData() {
+	var allTimesChosen = [];
+
+	for (var i = 0; i < picArray.length; i++) {
+		allTimesChosen = allPictures[i].timesChosen;
+	}
+
+	return allTimesChosen;
+}
+
+function graphTime(){
+	var barGraph = document.getElementById("stats").getContext("2d");
+	console.log(barGraph);
+	new Chart(barGraph).Bar(barData);
+}
+
 function doAllTheThings() {
 
 	constructPictures();
@@ -118,8 +135,10 @@ function doAllTheThings() {
 
 	eventListening();
 
-
+	// graphTime();
 }
+
+
 
 /* ============= Constructor: ============= */
 
@@ -130,6 +149,7 @@ function Picture(name) {
 	allPictures.push(this);
 }
 
+
 /* ============= Respective Methods: ============= */
 
 /* ============= Global Variables: ============= */
@@ -137,7 +157,26 @@ var allPictures = [];
 var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var numPicks = 0;
+
+var barData = {
+	labels : lableArray,
+	datasets : [
+		{
+			fillColor : "#48A497",
+			strokeColor : "#48A4D1",
+			data : [456,479,324,569,702,600]
+		},
+		{
+			fillColor : "rgba(73,188,170,0.4)",
+			strokeColor : "rgba(72,174,209,0.4)",
+			data : [364,504,605,400,345,320]
+		}
+
+	]
+
+}
 
 /* ============= Main(): ============= */
 
