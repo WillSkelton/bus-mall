@@ -71,7 +71,7 @@ p{
 	margin: 10px;
 	height: 560px;
 	width: 470px;
-	background-color: blue;
+	background-color: rgba(0, 150, 255, .5);
 }
 
 #pic3-parent{
@@ -83,11 +83,17 @@ p{
 	margin: 10px;
 	height: 560px;
 	width: 470px;
-	background-color: blue;
+	background-color: rgba(0, 150, 255, .5);
+}
+
+#statSection{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 #stats{
-	background-color: grey;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: row;

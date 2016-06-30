@@ -1,3 +1,36 @@
+/* ============= Global Variables: ============= */
+var allPictures = [];
+var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
+var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
+var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var allTimesChosen = [];
+var numPicks = 0;
+
+var data = {
+	labels: lableArray,
+  datasets: [
+    {
+      label: "Times Chosen",
+      backgroundColor: "rgba(0, 150, 255, .5)",
+      borderColor: "rgba(255,255,255,1)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: allTimesChosen,
+    }
+  ]
+};
+
+/* ============= Constructor: ============= */
+
+function Picture(name) {
+	this.name = name;
+	this.path = "assets/" + name + ".jpg";
+	this.timesChosen = 0;
+	allPictures.push(this);
+}
+
 /* ============= Functions: ============= */
 function specificRandom(min, max){
 	return Math.random() * (max-min) + min;
@@ -6,7 +39,7 @@ function specificRandom(min, max){
 function specificRandom(min, max, excluding){
 
 	while(true){
-		var rand = parseInt((Math.random() * (max-min) + min).toFixed(0));
+		var rand = Math.floor(Math.random() * (max-min) + min);
 		if (excluding.indexOf(rand) === -1) {
 			return rand;
 		}
@@ -40,7 +73,7 @@ function displayPictures(){
 		// Adds new Pictures to DOM
 		for (var i = 0; i < webSpot.length; i++) {
 			var picture = document.getElementById('pic' + (i + 1));
-			picture.src = "assets/" + picUsed[i].name + ".jpg";
+			picture.src = webSpot[i];
 			picture.name = picUsed[i].name;
 		}
 }
@@ -48,19 +81,21 @@ function displayPictures(){
 function showStats(event){
 	// console.log(numPicks);
 
-	if(numPicks === 1){
+	if(numPicks === 14){
 		removeListener();
-		// makeTable();
+		getStatData();
 		graphTime();
+
+
 	}
 	else{
-		var click = event.target.name;
+		var objName = event.target.name;
 		// console.log(click);
 		numPicks++;
 		for (var i = 0; i < allPictures.length; i++) {
-			if (allPictures[i].name === click){
+			if (allPictures[i].name === objName){
 				allPictures[i].timesChosen++;
-				// console.log(allPictures[i].timesChosen);
+
 				break;
 
 			}
@@ -94,45 +129,29 @@ function removeListener(){
 	pic3.removeEventListener("click", showStats);
 }
 
-function makeTable(){
-	for (var i = 0; i < picArray.length; i++) {
-		var tHeadParent = document.getElementById('thead-tr');
-		var tHeadChild = document.createElement('td');
-		tHeadChild.textContent = picArray[i];
-		tHeadParent.appendChild(tHeadChild);
-	}
-
-	for (var i = 0; i < picArray.length; i++) {
-		var tBodyParent = document.getElementById('tbody-tr');
-		var tBodyChild = document.createElement('td');
-		tBodyChild.textContent = allPictures[i].timesChosen;
-		tBodyParent.appendChild(tBodyChild);
-
-	}
-}
-
 function getStatData() {
-	var allTimesChosen = [];
+	console.log(allPictures);
 
-	for (var i = 0; i < picArray.length; i++) {
-		allTimesChosen = allPictures[i].timesChosen;
+	for (var i = 0; i < allPictures.length; i++) {
+		allTimesChosen[i] = allPictures[i].timesChosen;
+		console.log(allPictures[i].timesChosen);
 	}
-
-	return allTimesChosen;
 }
 
 function graphTime(){
-	var barGraph = document.getElementById("stats").getContext("2d");
-	console.log(barGraph);
-	new Chart(barGraph).Bar(barData);
+
+	var ctx = document.getElementById("stats").getContext("2d");
+	console.log(data);
+	var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+	});
 }
 
 function doAllTheThings() {
 
 	constructPictures();
-
 	displayPictures();
-
 	eventListening();
 
 	// graphTime();
@@ -140,49 +159,13 @@ function doAllTheThings() {
 
 
 
-/* ============= Constructor: ============= */
-
-function Picture(name) {
-	this.name = name;
-	this.path = "assets/" + name + ".jpg";
-	this.timesChosen = 0;
-	allPictures.push(this);
-}
-
 
 /* ============= Respective Methods: ============= */
 
-/* ============= Global Variables: ============= */
-var allPictures = [];
-var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
-var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
-var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var numPicks = 0;
 
-var barData = {
-	labels : lableArray,
-	datasets : [
-		{
-			fillColor : "#48A497",
-			strokeColor : "#48A4D1",
-			data : [456,479,324,569,702,600]
-		},
-		{
-			fillColor : "rgba(73,188,170,0.4)",
-			strokeColor : "rgba(72,174,209,0.4)",
-			data : [364,504,605,400,345,320]
-		}
 
-	]
-
-}
 
 /* ============= Main(): ============= */
-
-
-
-
 doAllTheThings();
 
 
