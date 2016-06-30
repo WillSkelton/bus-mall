@@ -48,10 +48,12 @@ function displayPictures(){
 function showStats(event){
 	// console.log(numPicks);
 
-	if(numPicks === 1){
+	if(numPicks === 14){
 		removeListener();
 		// makeTable();
+
 		graphTime();
+
 	}
 	else{
 		var click = event.target.name;
@@ -60,7 +62,7 @@ function showStats(event){
 		for (var i = 0; i < allPictures.length; i++) {
 			if (allPictures[i].name === click){
 				allPictures[i].timesChosen++;
-				// console.log(allPictures[i].timesChosen);
+
 				break;
 
 			}
@@ -112,27 +114,29 @@ function makeTable(){
 }
 
 function getStatData() {
+	console.log(allPictures);
+
 	var allTimesChosen = [];
-
 	for (var i = 0; i < picArray.length; i++) {
-		allTimesChosen = allPictures[i].timesChosen;
+		allTimesChosen[i] = allPictures[i].timesChosen;
 	}
-
-	return allTimesChosen;
 }
 
 function graphTime(){
-	var barGraph = document.getElementById("stats").getContext("2d");
-	console.log(barGraph);
-	new Chart(barGraph).Bar(barData);
+	console.log(allTimesChosen);
+
+	var ctx = document.getElementById("stats").getContext("2d");
+	console.log(data);
+	var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+	});
 }
 
 function doAllTheThings() {
 
 	constructPictures();
-
 	displayPictures();
-
 	eventListening();
 
 	// graphTime();
@@ -158,31 +162,25 @@ var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var allTimesChosen = [];
 var numPicks = 0;
 
-var barData = {
-	labels : lableArray,
-	datasets : [
-		{
-			fillColor : "#48A497",
-			strokeColor : "#48A4D1",
-			data : [456,479,324,569,702,600]
-		},
-		{
-			fillColor : "rgba(73,188,170,0.4)",
-			strokeColor : "rgba(72,174,209,0.4)",
-			data : [364,504,605,400,345,320]
-		}
-
-	]
-
-}
+var data = {
+	labels: lableArray,
+  datasets: [
+    {
+      label: "Times Chosen",
+      backgroundColor: "rgba(255,99,132,0.2)",
+      borderColor: "rgba(255,99,132,1)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: allTimesChosen,
+    }
+  ]
+};
 
 /* ============= Main(): ============= */
-
-
-
-
 doAllTheThings();
 
 
