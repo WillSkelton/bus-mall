@@ -12,10 +12,10 @@ var data = {
   datasets: [
     {
       label: "Times Chosen",
-      backgroundColor: "rgba(0, 150, 255, .5)",
+      backgroundColor: "rgba(0, 150, 255, .7)",
       borderColor: "rgba(255,255,255,1)",
       borderWidth: 1,
-      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBackgroundColor: "rgba(255,99,132,0.7)",
       hoverBorderColor: "rgba(255,99,132,1)",
       data: allTimesChosen,
     }
