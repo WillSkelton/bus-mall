@@ -139,6 +139,11 @@ function getStatData() {
 }
 
 function graphTime(){
+	var parent = document.getElementById('statsSection');
+	parent.style.opacity = "1";
+
+
+	// parent.style.backgroundColor = 'rgb(' + [255,255,255, 0.4].join(',') + ')';
 
 	var ctx = document.getElementById("stats").getContext("2d");
 	console.log(data);
