@@ -1,9 +1,11 @@
 body{
 	background-image: url(style/sand.jpg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 header{
-
 }
 
 main{
@@ -76,22 +78,6 @@ p{
 	background-color: rgba(0, 150, 255, .5);
 }
 
-#statSection{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-}
-
-#stats{
-	border-radius: 10px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	width: 80%;
-}
-
 #pic1{
 	border-radius: 10px;
 	width: 300px;
@@ -106,6 +92,37 @@ p{
 	border-radius: 10px;
 	width: 300px;
 }
+
+#statsSection{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+	width: 1080px;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+#stats{
+	border-radius: 10px;
+	/*display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;*/
+}
+
+#instructions{
+	background-color: rgba(255, 255, 255, .6);
+	border-radius: 10px;
+	padding: 20px;
+	width: 1080px;
+
+}
+
+
+
 
 
 
