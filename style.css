@@ -101,7 +101,7 @@ p{
 	width: 300px;
 }
 
-#statsSection{
+#barChartSection{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -111,12 +111,33 @@ p{
 	width: 1080px;
 	border-radius: 10px;
 	padding: 20px;
+	margin: 10px
+
 }
 
-#stats{
+#pieChartSection{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	background-color: rgba(255, 255, 255, 0.6);
+	width: 1080px;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 10px
+}
+
+#barChart{
 	border-radius: 10px;
 
 }
+
+#pieChart{
+	border-radius: 10px;
+
+}
+
 
 #instructions{
 	background-color: rgba(255, 255, 255, .6);
