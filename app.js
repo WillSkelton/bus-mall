@@ -79,7 +79,6 @@ function displayPictures(){
 }
 
 function showStats(event){
-	// console.log(numPicks);
 
 	if(numPicks === 14){
 		removeListener();
@@ -90,7 +89,6 @@ function showStats(event){
 	}
 	else{
 		var objName = event.target.name;
-		// console.log(click);
 		numPicks++;
 		for (var i = 0; i < allPictures.length; i++) {
 			if (allPictures[i].name === objName){
@@ -130,11 +128,9 @@ function removeListener(){
 }
 
 function getStatData() {
-	console.log(allPictures);
 
 	for (var i = 0; i < allPictures.length; i++) {
 		allTimesChosen[i] = allPictures[i].timesChosen;
-		console.log(allPictures[i].timesChosen);
 	}
 }
 
@@ -146,7 +142,6 @@ function graphTime(){
 	// parent.style.backgroundColor = 'rgb(' + [255,255,255, 0.4].join(',') + ')';
 
 	var ctx = document.getElementById("stats").getContext("2d");
-	console.log(data);
 	var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: data,

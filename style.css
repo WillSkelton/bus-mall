@@ -1,11 +1,19 @@
 body{
-	background-image: url(style/sand.jpg);
+	background-image: url(style/paper.jpg);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
 header{
+	background-color: rgba(255, 255, 255, .6);
+	border-radius: 10px;
+	padding: 20px;
+	width: 600px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 main{
@@ -99,7 +107,7 @@ p{
 	align-items: center;
 	justify-content: center;
 	opacity: 0;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.6);
 	width: 1080px;
 	border-radius: 10px;
 	padding: 20px;
@@ -107,10 +115,7 @@ p{
 
 #stats{
 	border-radius: 10px;
-	/*display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;*/
+
 }
 
 #instructions{
