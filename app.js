@@ -4,7 +4,7 @@ var webSpot = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picUsed = ["plcHldr1", "plcHldr2", "plcHldr3"];
 var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var allTimesChosen = [];
+var allTimesChosen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var percentAllTimesChosen = [];
 var backgroundColors = ['#0096FF', '#E800FF', "#766e54", '#17FF00', '#FF6900', "#01b358",  '#580CE8', "#580407", '#0CE86F', '#EBFFC2', '#FF1400', '#BDE8C8', '#FF0D77', "#205c40", "#e2a1d6", "#c4d257", "#6577cd", "#34efc1", "#647004", "#5af5d7"];
 var hoverColors = ["#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"];
@@ -99,6 +99,10 @@ function showStats(event){
 		getStatData();
 		graphTime();
 
+		console.log(allTimesChosen);
+
+		updateLocalStorage();
+		console.log(allTimesChosen);
 
 	}
 	else{
@@ -119,6 +123,10 @@ function showStats(event){
 }
 
 function eventListening() {
+
+	var playAgain = document.getElementById('playAgain');
+	playAgain.addEventListener("click", doAllTheThings);
+
 	var randomizer1 = document.getElementById(pic1);
 	pic1.addEventListener("click", showStats);
 
@@ -131,6 +139,7 @@ function eventListening() {
 }
 
 function removeListener(){
+
 	var randomizer1 = document.getElementById(pic1);
 	pic1.removeEventListener("click", showStats);
 
@@ -145,12 +154,12 @@ function getStatData() {
 
 	for (var i = 0; i < allPictures.length; i++) {
 		allTimesChosen[i] = allPictures[i].timesChosen;
-		//
-		// if(allPictures[i].timesChosen > 0){
-		// 	if(chosenPictures.indexOf(allPictures[i]) === -1){
-		// 		chosenPictures[i] = allPictures[i]
-		// 	}
+		// if(chosenPictures.indexOf(allPictures[i]) === -1){
+		// 	chosenPictures[i] = allPictures[i]
 		// }
+
+		localStorage.setItem(allPictures[i].name, allTimesChosen[i]);
+		
 	}
 }
 
@@ -176,14 +185,20 @@ function graphTime(){
 }
 
 function doAllTheThings() {
-
+	numPicks = 0;
 	constructPictures();
 	displayPictures();
 	eventListening();
 
+
 	// graphTime();
 }
 
+function updateLocalStorage() {
+	for (var i = 0; i < picArray.length; i++) {
+		allTimesChosen[i] += parseInt(localStorage.getItem(picArray[i]));
+	}
+}
 
 /* ============= Respective Methods: ============= */
 
@@ -194,6 +209,7 @@ function doAllTheThings() {
 
 
 doAllTheThings();
+
 
 
 
