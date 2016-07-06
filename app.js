@@ -190,7 +190,7 @@ function randColor() {
 
 	// console.log(chars);
 
-	for (var i = 0; i < 18; i++) {
+	for (var i = 0; i < picArray.length - 2; i++) {
 		var currentColor = '';
 		for (var j = 0; j < 6; j++) {
 			currentColor += chars[Math.floor(Math.random() * 15-0)];
@@ -202,8 +202,8 @@ function randColor() {
 
 function doAllTheThings() {
 	numPicks = 0;
-	randColor();
 	constructPictures();
+	randColor();
 	displayPictures();
 	eventListening();
 
@@ -212,14 +212,9 @@ function doAllTheThings() {
 }
 
 function updateLocalStorage() {
-	for (var i = 0; i < picArray.length; i++) {
-		allTimesChosen[i] += parseInt(localStorage.getItem(picArray[i]));
-	}
+	localStorage.setItem('allPictures', JSON.stringify(allPictures));
 }
 
-function sendToLS() {
-	localStorage.setItem(allPictures);
-}
 /* ============= Respective Methods: ============= */
 
 
