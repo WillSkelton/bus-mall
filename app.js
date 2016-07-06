@@ -6,7 +6,7 @@ var picArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 
 var lableArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var allTimesChosen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var percentAllTimesChosen = [];
-var backgroundColors = ['#0096FF', '#E800FF', "#766e54", '#17FF00', '#FF6900', "#01b358",  '#580CE8', "#580407", '#0CE86F', '#EBFFC2', '#FF1400', '#BDE8C8', '#FF0D77', "#205c40", "#e2a1d6", "#c4d257", "#6577cd", "#34efc1", "#647004", "#5af5d7"];
+var backgroundColors = ['#0096FF', '#E800FF'];
 var hoverColors = ["#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"];
 var chosenPictures = [];
 var numPicks = 0;
@@ -16,11 +16,11 @@ var BarChartData = {
   datasets: [
     {
       label: "Times Chosen",
-      backgroundColor: "rgba(0, 150, 255, .7)",
-      borderColor: "rgba(255,255,255,1)",
+      backgroundColor: backgroundColors,
+      borderColor: hoverColors,
       borderWidth: 1,
-      hoverBackgroundColor: "rgba(255,99,132,0.7)",
-      hoverBorderColor: "rgba(255,99,132,1)",
+      hoverBackgroundColor: hoverColors,
+      hoverBorderColor: backgroundColors,
       data: allTimesChosen,
     }
   ]
@@ -36,6 +36,8 @@ var PieChartData = {
         }]
 };
 
+var localData = {
+}
 /* ============= Constructor: ============= */
 
 function Picture(name) {
@@ -158,8 +160,6 @@ function getStatData() {
 		// 	chosenPictures[i] = allPictures[i]
 		// }
 
-		localStorage.setItem(allPictures[i].name, allTimesChosen[i]);
-		
 	}
 }
 
@@ -184,8 +184,25 @@ function graphTime(){
 	});
 }
 
+function randColor() {
+	var chars = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',];
+	var colors = [];
+
+	// console.log(chars);
+
+	for (var i = 0; i < 18; i++) {
+		var currentColor = '';
+		for (var j = 0; j < 6; j++) {
+			currentColor += chars[Math.floor(Math.random() * 15-0)];
+		}
+		backgroundColors.push('#' + currentColor);
+	}
+	console.log(colors);
+}
+
 function doAllTheThings() {
 	numPicks = 0;
+	randColor();
 	constructPictures();
 	displayPictures();
 	eventListening();
@@ -200,6 +217,9 @@ function updateLocalStorage() {
 	}
 }
 
+function sendToLS() {
+	localStorage.setItem(allPictures);
+}
 /* ============= Respective Methods: ============= */
 
 
